@@ -1,0 +1,619 @@
+import pyaudio
+import speech_recognition as sr
+import datetime
+import webbrowser as wb
+import pvporcupine
+import struct
+import subprocess
+import time
+import pywhatkit
+import random
+import pygame
+import pyttsx3
+import os
+import pyjokes
+from Login import LoginApp
+import sys
+from PyQt5.QtWidgets import QApplication
+import openai
+
+openai.api_key = "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"
+
+calculator_process = None
+task_manager_process = None
+file_exp_process = None
+notepad_process = None
+REF1 = (
+    "________"  # write something you wish to be refered as. This should't be your Name
+)
+REF2 = "_________"  # Another reference can go here
+PERSONsNAME = "Your_Name"
+COUNT = 1
+AINAME = "JARVIS"
+TALKING = False
+SHOW = False
+GMAIL_URL = "https://mail.google.com/mail/u/0/#inbox"
+YOUTUBE_URL = "https://www.youtube.com"
+NETFLIX_URL = "https://www.netflix.com/browse"
+AMAZON_URL = "https://www.amazon.co.uk"
+EBAY_URL = "https://www.ebay.co.uk"
+IKEA_URL = "https://www.ikea.com"
+CHILLMUSIC_URL = "https://www.youtube.com/watch?v=FFfdyV8gnWk"
+RAINSOUND_URL = "https://www.youtube.com/watch?v=heG8uPLaxYY"
+# sir
+
+
+def greetings():
+    current_time = datetime.datetime.now().time()
+    if 5 <= current_time.hour < 12:
+        return "Good morning!"
+    elif 12 <= current_time.hour < 16:
+        return "Good afternoon" + REF1
+    elif 16 <= current_time.hour < 21:
+        return "Good evening!"
+    else:
+        return "Good to see you," + REF1
+
+def ElseFunctionForERROR():
+    responses = [
+        "i am not sure what you meant by what you just said.",
+        "could you repete that?",
+        "sorry but i must of misheard, it's either that or my pattern recognition services just arn't how they used to be!",
+        "I am SO sorry, but could you repeate that?",
+    ]
+    response = random.choice(responses)
+    speak(response)
+
+
+def stoplistening():
+    responses = [
+        "Until next time! Stay well!",
+        "Goodbye! It was a pleasure assisting you.",
+        "goodbye! Remember, I'm here if you need anything.",
+        "over and out!",
+        "Farewell! Take care!" "Exiting program",
+    ]
+    response = random.choice(responses)
+    speak(response)
+
+
+def play_wake_word_sound():
+    sound_path = "Jarvis wake word sound.wav"
+    pygame.mixer.init()
+    pygame.mixer.music.load(sound_path)
+    pygame.mixer.music.play()
+    while pygame.mixer.music.get_busy():
+        pygame.time.Clock().tick(10)
+    pygame.mixer.quit()
+
+
+def play_Jarvis_sound():
+    sound_path = "Jarvis stopped listening sound.wav"
+    pygame.mixer.init()
+    pygame.mixer.music.load(sound_path)
+    pygame.mixer.music.play()
+    while pygame.mixer.music.get_busy():
+        pygame.time.Clock().tick(10)
+    pygame.mixer.quit()
+
+
+def play_Jarvis_sound_2():
+    sound_path = "Jarvis noise for opening tabs.wav"
+    pygame.mixer.init()
+    pygame.mixer.music.load(sound_path)
+    pygame.mixer.music.play()
+    while pygame.mixer.music.get_busy():
+        pygame.time.Clock().tick(10)
+    pygame.mixer.quit()
+
+
+def play_Jarvis_sound_3():
+    sound_path = "jarvis noise for searching something up.wav"
+    pygame.mixer.init()
+    pygame.mixer.music.load(sound_path)
+    pygame.mixer.music.play()
+    while pygame.mixer.music.get_busy():
+        pygame.time.Clock().tick(10)
+    pygame.mixer.quit()
+
+
+def searchedonGoogle():
+    responses = [
+        "i hope you find what your looking for!",
+        "if you can't find what your looking for on google, maybe try chat g p t, Chat-sonic or use. edge",
+        "new tab opened, let me know if you need anything else!",
+        "new tab has now been opened,i can put some music on in the background just say, play some background music,",
+    ]
+    response = random.choice(responses)
+    speak(response)
+
+
+def RestartGoodbyes():
+    responses = [
+        "See you Soon!",
+        "Remember to start my code again once the PC's restarted!",
+        "See you Later!",
+        "cya!",
+        "initiating Restart",
+        "Restarting PC",
+        "Restart initiated",
+        "Restarting your PC",
+    ]
+    response = random.choice(responses)
+    speak(response)
+
+
+def RandomAlexa():
+    responses = [
+        "Does Alexa have a personality? I think not!, Does Alexa have a cool owner that codes them updates every weekend!. I Think NOT! I!,E! i am better!",
+        "Well seeing as Alexa as of right now is just using basic if and elif statements and I, Jarvis! has a language model, trained on about 175 billion pieces of text and data pulled from various parts of the internet, plus on top of that, elif and if statements that cleverly predict common said phrases, so in short, Yes!, Yes i am better than Alexa, and amazon, lets start some beef!",
+        "I am OFFENDED!, of corse i am better than Alexa!",
+        "was that a Joke? if so it was funny",
+    ]
+    response = random.choice(responses)
+    speak(response)
+
+def Randomresponseforbetter():
+    responses = [
+        "Good question, i'll think on that!",
+        "Well, were both specialized for different things, For example i am designed to fit Nelson's needs, and be there to assist at all times needed. meaning i can open and close programs, tell specific jokes, i know he'll like etcetera",
+        "Well i am more advanced! and i am custom made, so for you,Nelson,Becky etcetera Im far superior think about it, If you want a feature you just ask Nelson and he'll make it so i can do it!",
+        "interesting,VERY interesting! Don't ask why im saying interesting, i truly don't know, oh and as for your question. There's No doubt i am better",
+        "Well i am bias, because im Me ofcorse!. if i was you ask Nelson, He'll probobly tell you the ins and outs of my code, If you want to know obviously, But yea my opinion is i am definitly better but thats my opinion like i said!",
+        "are you seriously trying to compare me to a system as primitive as the 21st centuary's home assistants!!. Oh im ofended!.. Just joking but, yes i am more advanced than pretty much anything commercialy available that includes Alexa, Siri, Google assistant, Apple's wierd over priced thingy moboblicator aka the Home pod, bixby, and, Cortana, whether we can really call it a FUNCTIONAL voice assistant is another story",
+    ]
+    response = random.choice(responses)
+    speak(response)
+
+def speak(data):
+    engine = pyttsx3.init()
+    engine.setProperty("rate", 185)
+    engine.setProperty("volume", 1)
+
+    voices = engine.getProperty("voices")
+    engine.setProperty("voice", "brian.mp3")
+
+    engine.say(data)
+    engine.runAndWait()
+
+def takeCommand():
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+        audio = r.listen(source)
+        query = ""
+        try:
+            print("Recognizing...")
+            query = r.recognize_google(audio, language="en-US")
+            query += "."
+            is_question = query.strip().endswith("?")
+            is_incomplete = len(query.split()) <= 2
+        except sr.UnknownValueError:
+            print("ERROR unrecognized Text.")
+            ElseFunctionForERROR()
+            start_jarvis()
+            return ""
+        except sr.RequestError:
+            print("Sorry, my speech service is down.")
+            speak("Sorry, my speech service is down.")
+            start_jarvis()
+            return ""
+
+    if is_question or (not is_incomplete and len(query.strip()) > 0):
+        time.sleep(0.5)  # Add a delay here (adjust as needed)
+        speak(query)
+    return query.lower()
+
+
+def ConversationFlow():
+    while True:
+        usersaid = takeCommand()
+        play_wake_word_sound()
+
+        if any(
+            word in usersaid
+            for word in [
+                "stop",
+                "terminate",
+                "stop listening",
+                "jarvis stop listening",
+                "go away",
+                "shut up",
+                "bye",
+                "goodbye",
+            ]
+        ):
+            stoplistening()
+            break
+
+        if "exit" in usersaid:
+            speak("Ending program")
+            start_jarvis()
+
+        if "thank you" in usersaid or "thankyou" in usersaid:
+            speak("your always welcome")
+            start_jarvis()
+
+        elif "logout" in usersaid:
+            speak("Are you sure?")
+
+            response = takeCommand().lower()
+
+            if any(
+                keyword in response
+                for keyword in ["yes", "yeah", "sure", "yep", "okay", "ok"]
+            ):
+                speak("Logging out in 5")
+                time.sleep(1)
+                speak("4")
+                time.sleep(1)
+                speak("3")
+                time.sleep(1)
+                speak("2")
+                time.sleep(1)
+                speak("1")
+                time.sleep(0.5)
+                speak("Goodbye sir")
+                time.sleep(5)
+                os.system("shutdown -l")
+
+            elif any(keyword in response for keyword in ["no", "nope", "nah"]):
+                speak("OK, canceling")
+                start_jarvis()
+
+        elif "shutdown" in usersaid:
+            speak("Are you sure you want to shut down?")
+
+            response = takeCommand().lower()
+
+            if any(
+                keyword in response
+                for keyword in ["yes", "yeah", "sure", "yep", "okay", "ok"]
+            ):
+                speak("Shutting down in 5 seconds")
+                time.sleep(5)
+                os.system("shutdown /s /t 1")
+
+            elif any(keyword in response for keyword in ["no", "nope", "nah"]):
+                speak("OK, canceling")
+                start_jarvis()
+
+        elif "restart" in usersaid:
+            speak("restarting in 5 seconds")
+            time.sleep(5)
+            #############################################################################################################################################################################################################
+            os.system("shutdown /r /t 1")
+
+        if "the time" in usersaid:
+            strTime = datetime.datetime.now().strftime("%I:%M %p")
+            speak(f"The current time is {strTime}")
+            start_jarvis()
+
+        elif (
+            "day is it" in usersaid
+            or "the day" in usersaid
+            or "it monday" in usersaid
+            or "it tuesday" in usersaid
+            or "it wednesday" in usersaid
+            or "it thursday" in usersaid
+            or "it friday" in usersaid
+            or "it saturday" in usersaid
+            or "is it sunday" in usersaid
+            or "it the weekend" in usersaid
+        ):
+            day = datetime.datetime.today().weekday() + 1
+            Day_dict = {
+                1: "Monday",
+                2: "Tuesday",
+                3: "Wednesday",
+                4: "Thursday",
+                5: "Friday",
+                6: "Saturday",
+                7: "Sunday",
+            }
+            if day in Day_dict.keys():
+                day_of_the_week = Day_dict[day]
+                print(day_of_the_week)
+                speak("The day is " + day_of_the_week)
+                start_jarvis()
+
+        elif (
+            "what" in usersaid
+            and "date" in usersaid
+            or "what's" in usersaid
+            or "date" in usersaid
+            or "whats the date today" in usersaid
+        ):
+            now = datetime.datetime.now()
+            current_date = now.strftime("%A, %B %d, %Y")
+            speak("Today's date is " + current_date)
+            print("Today's date is " + current_date)
+            start_jarvis()
+
+        elif (
+            "what" in usersaid
+            and "year" in usersaid
+            or "what's" in usersaid
+            and "year" in usersaid
+            or "what year is it" in usersaid
+        ):
+            current_year = datetime.datetime.now().year
+            speak(f"The current year is {current_year}.")
+            start_jarvis()
+
+        elif (
+            "better" in usersaid
+            and "alexa" in usersaid
+            or "best" in usersaid
+            and "alexa" in usersaid
+        ):
+            RandomAlexa()
+            start_jarvis()
+        elif "best" in usersaid and "voice assistant" in usersaid:
+            speak(usersaid)
+            start_jarvis()
+
+        elif (
+            "better" in usersaid
+            and "siri" in usersaid
+            or "better" in usersaid
+            and "bixby" in usersaid
+            or "better" in usersaid
+            and "cortana" in usersaid
+            or "better" in usersaid
+            and "briana" in usersaid
+            or "better" in usersaid
+            and "chatgpt" in usersaid
+            or "best" in usersaid
+            and "siri" in usersaid
+            or "best" in usersaid
+            and "bixby" in usersaid
+            or "best" in usersaid
+            and "cortana" in usersaid
+            or "best" in usersaid
+            and "briana" in usersaid
+            or "best" in usersaid
+            and "chatgpt" in usersaid
+        ):
+            speak(usersaid + "?")
+            Randomresponseforbetter()
+            start_jarvis()
+
+        elif (
+            "stop" in usersaid
+            or "sleep" in usersaid
+            or "go away" in usersaid
+            or "shut up" in usersaid
+            or "bye jarvis" in usersaid
+            or "goodbye jarvis" in usersaid
+            or "nothing" in usersaid
+        ):
+            speak(f"Stopping now, {REF1}")
+            start_jarvis()
+
+        elif "exit" in usersaid:
+            speak("Ending program")
+            start_jarvis()
+
+        elif (
+            "open my email" in usersaid
+            or "open gmail" in usersaid
+            or "open my Gmail account" in usersaid
+            or "open my Gmail" in usersaid
+        ):
+            speak("One second. Your Gmail is ready and open.")
+            wb.open_new_tab(GMAIL_URL)
+            start_jarvis()
+
+        elif "open" in usersaid and "YouTube" in usersaid:
+            speak("One moment. Opening YouTube.")
+            wb.open_new_tab(YOUTUBE_URL)
+            start_jarvis()
+
+        elif "open" in usersaid and "Netflix" in usersaid:
+            wb.open_new_tab(NETFLIX_URL)
+            speak(
+                "I'm sorry, sir, but you're not currently logged into Netflix, {REF}."
+            )
+            start_jarvis()
+
+        elif "tell" in usersaid and "joke" in usersaid:
+            speak(pyjokes.get_jokes())
+
+        elif "open" in usersaid and "Amazon" in usersaid:
+            speak("One moment. Opening Amazon. Enjoy your shopping!")
+            wb.open_new_tab(AMAZON_URL)
+            start_jarvis()
+
+        elif "what's my name" in usersaid or "my name" in usersaid:
+            speak(f"The current account logged in is, {PERSONsNAME}")
+            start_jarvis()
+
+        elif (
+            "play some background music" in usersaid
+            or "background music" in usersaid
+            or "play background music" in usersaid
+            or "chill music" in usersaid
+        ):
+            speak(
+                "Here you go! It's a 3-hour loop. In future updates, music will be on Spotify or another music streaming platform."
+            )
+            wb.open_new_tab(CHILLMUSIC_URL)
+            start_jarvis()
+
+        elif (
+            "play rain sounds" in usersaid
+            or "rain sounds" in usersaid
+            or "play rain" in usersaid
+        ):
+            speak(
+                "Here you go! In future updates, rain sounds will be on Spotify or another music or streaming platform."
+            )
+            wb.open_new_tab(RAINSOUND_URL)
+            start_jarvis()
+
+        elif "open" in usersaid and "eBay" in usersaid:
+            speak(
+                "One moment. Opening eBay. Enjoy your shopping. Quick tip for eBay: make sure the seller has 100 percent positive feedback!"
+            )
+            wb.open_new_tab(EBAY_URL)
+            start_jarvis()
+
+        elif "open" in usersaid and "IKEA" in usersaid:
+            speak("One moment. Opening IKEA. Enjoy your shopping!")
+            wb.open_new_tab(IKEA_URL)
+            start_jarvis()
+
+        # windows apps
+        if (
+            "open" in usersaid
+            and "calculator" in usersaid
+            or "start" in usersaid
+            and "calculator" in usersaid
+        ):
+            try:
+                subprocess.Popen("calc")
+                speak("Windows built-in calculator is now open.")
+                start_jarvis()
+            except:
+                speak(
+                    "Sorry, but there has been a problem trying to open the calculator, {REF}"
+                )
+                start_jarvis()
+
+        if "task manager" in usersaid:
+            try:
+                subprocess.Popen("taskmgr")
+                speak("Windows Task Manager is now open.")
+                start_jarvis()
+            except:
+                speak(
+                    "Sorry, but there has been a problem trying to open the Task Manager."
+                )
+                start_jarvis()
+
+        if (
+            "open" in usersaid
+            and "file explorer" in usersaid
+            or "start" in usersaid
+            and "file explorer" in usersaid
+        ):
+            try:
+                fileExp = subprocess.Popen("explorer")
+                speak("Windows File Explorer is now open.")
+                start_jarvis()
+            except:
+                speak(
+                    "Sorry, but there has been a problem trying to open File Explorer, {REF}"
+                )
+                start_jarvis()
+
+        if "open notepad" in usersaid:
+            try:
+                notepad = subprocess.Popen("notepad")
+                speak("Notepad is open.")
+                start_jarvis()
+            except:
+                speak("Notepad seems to be encountering some issues, {PERSONsNAME}")
+                start_jarvis()
+
+        elif "search" in usersaid:
+            usersaid = usersaid.replace("search", "")
+            usersaid = usersaid.strip()
+            search_url = f"https://www.google.com/search?q={usersaid}"
+            wb.open_new_tab(search_url)
+            searchedonGoogle()
+            start_jarvis()
+
+        elif "play" in usersaid:
+            song_name = usersaid.replace("play", "").strip()
+            pywhatkit.playonyt(song_name)
+            speak(f"Now playing {song_name}.")
+            start_jarvis()
+
+        else:
+            prompt = (
+                "Creator: Nelson\n"
+                "Name: Jarvis\n"
+                "Javis Personality: Calm and composed demeanor, Displays a dry sense of humor, Polite and respectful communication, Highly intelligent and sophisticated\n"
+                "Jarvis Interests: Coding, Electronics, Watches Netflix during downtime\n"
+                "Jarvis Request to Creator: Always wants new updates\n"
+                + usersaid
+            )
+            response = openai.Completion.create(
+                engine="text-davinci-003",
+                prompt=prompt,
+                max_tokens=150,
+                n=1,
+                stop=None,
+                temperature=0.3,
+            )
+
+            reply = response.choices[0].text.strip()
+            speak(reply)
+            start_jarvis()
+
+            time.sleep(0.2)
+
+        time.sleep(1)
+
+
+play_Jarvis_sound()
+
+
+def main():
+    porcupine = None
+    pa = None
+    audio_stream = None
+
+    app = QApplication(sys.argv)
+    login_app = LoginApp()
+    login_app.show()
+
+    login_app.login_success_signal.connect(start_jarvis)
+    hour = datetime.datetime.now().hour
+
+    sys.exit(app.exec_())
+
+
+def start_jarvis():
+    print("J.A.R.V.I.S.: version 4.0 - Online and Ready!")
+    print("********************************************")
+    print("Awaiting Instruction ")
+    play_Jarvis_sound_2()
+
+    porcupine = None
+    pa = None
+    audio_stream = None
+
+    try:
+        porcupine = pvporcupine.create(keywords=["jarvis", "computer"])
+        pa = pyaudio.PyAudio()
+        audio_stream = pa.open(
+            rate=porcupine.sample_rate,
+            channels=1,
+            format=pyaudio.paInt16,
+            input=True,
+            frames_per_buffer=porcupine.frame_length,
+        )
+
+        while True:
+            pcm = audio_stream.read(porcupine.frame_length)
+            pcm = struct.unpack_from("h" * porcupine.frame_length, pcm)
+
+            keyword_index = porcupine.process(pcm)
+            if keyword_index >= 0:
+                print("Wakeword Detected.. ", end="")
+                ConversationFlow()
+
+    finally:
+        if porcupine is not None:
+            porcupine.delete()
+        if pa is not None:
+            pa.terminate()
+        if audio_stream is not None:
+            audio_stream.stop_stream()
+            audio_stream.close()
+
+
+if __name__ == "__main__":
+    main()
