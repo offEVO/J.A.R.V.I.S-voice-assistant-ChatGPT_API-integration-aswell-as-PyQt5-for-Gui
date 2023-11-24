@@ -7,3 +7,7 @@ This is How the Login GUI should look..
 ![image](https://github.com/offEVO/J.A.R.V.I.S-voice-assistant/assets/140699812/bb60f315-a03b-4faf-87a1-ac5b85b1e54d)
 
 Feel free to add what ever image in the Image box at a resolution of "512 x 512"
+
+Make Sure both your Login.py and Your Jarvis main scripts ar in the same File 📂
+
+![image](https://github.com/offEVO/J.A.R.V.I.S-voice-assistant/assets/140699812/22cbb022-eeca-45e1-92e7-7088d6b0b29e)
