@@ -23,3 +23,11 @@ NOTE: it is an older version (because it doesn't require an API_KEY)
 Click on this link, it will take you a specific page on PyPy for Pvporkupine V1.9.5 there are more recent versions, you can experiment with those if you want but i personally find 1.9.5 wors very well, I use this older version because like I meantioned earlyer it doesn't need an API KEY
 
 LINK: https://pypi.org/project/pvporcupine/1.9.5/
+
+The Page for the Pvporkupine should look like this ↓↓↓
+
+![image](https://github.com/offEVO/J.A.R.V.I.S-voice-assistant/assets/140699812/73cd391d-e365-4827-829a-53529f8dfc80)
+
+your going to want to copy the part that says "pip install pvporcupine==1.9.5" From there you need to paste that into your terminal, You will need python installed other wise the pip command will NOT work. If your using VsCode then you can simply paste it into the built in terminal ↓↓↓
+
+![image](https://github.com/offEVO/J.A.R.V.I.S-voice-assistant/assets/140699812/d0d8e29b-1fe2-412c-8f54-54b8d67ea50f)
