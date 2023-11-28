@@ -13,3 +13,14 @@ This is How the Login GUI code should look..
 
 Feel free to add what ever image in the Image box at a resolution of "512 x 512"
 
+FYI there will be a few extra dependancys that require special setup, this includes the wake word detection and dialogflow intergration, in this version of code i have decided not to integrate dialogflow, if you want to incorporate, then Create an agent and make some intents perhaps something like this ↓↓↓
+
+![image](https://github.com/offEVO/J.A.R.V.I.S-voice-assistant/assets/140699812/61fc5b67-9284-4bc4-964d-6e6054d948f2)
+
+Here's how to install PVPorkupine..
+NOTE: it is an older version (because it doesn't require an API_KEY)
+
+
+Click on this link, it will take you a specific page on PyPy for Pvporkupine V1.9.5 there are more recent versions, you can experiment with those if you want but i personally find 1.9.5 wors very well, I use this older version because like i meantioned earlyer it doesn't need an API KEY
+
+LINK: https://pypi.org/project/pvporcupine/1.9.5/
