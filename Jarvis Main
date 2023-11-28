@@ -17,18 +17,19 @@ import sys
 from PyQt5.QtWidgets import QApplication
 import openai
 
-openai.api_key = "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"
+# Set up OpenAI API key
+openai.api_key = "Add your API_KEY here"  # Add your API_KEY here
 
+# Initialize processes for various applications
 calculator_process = None
 task_manager_process = None
 file_exp_process = None
 notepad_process = None
-REF1 = (
-    "________"  # write something you wish to be refered as. This should't be your Name
-)
-REF2 = "_________"  # Another reference can go here
-PERSONsNAME = "Your_Name"
-COUNT = 1
+
+# References and URLs
+REF1 = "________"
+REF2 = "_________"
+PERSONsNAME = "Your_Name"  # Add your name here
 AINAME = "JARVIS"
 TALKING = False
 SHOW = False
@@ -37,12 +38,9 @@ YOUTUBE_URL = "https://www.youtube.com"
 NETFLIX_URL = "https://www.netflix.com/browse"
 AMAZON_URL = "https://www.amazon.co.uk"
 EBAY_URL = "https://www.ebay.co.uk"
-IKEA_URL = "https://www.ikea.com"
-CHILLMUSIC_URL = "https://www.youtube.com/watch?v=FFfdyV8gnWk"
-RAINSOUND_URL = "https://www.youtube.com/watch?v=heG8uPLaxYY"
-# sir
+IKEA_URL = "https://www.ikea.com"  # Feel free to change all of these URLs, make sure to change the variable names as well as where they're called in the code
 
-
+# Function to greet based on the current time
 def greetings():
     current_time = datetime.datetime.now().time()
     if 5 <= current_time.hour < 12:
@@ -54,29 +52,31 @@ def greetings():
     else:
         return "Good to see you," + REF1
 
+# Function to handle unrecognized commands
 def ElseFunctionForERROR():
     responses = [
-        "i am not sure what you meant by what you just said.",
-        "could you repete that?",
-        "sorry but i must of misheard, it's either that or my pattern recognition services just arn't how they used to be!",
-        "I am SO sorry, but could you repeate that?",
+        "I am not sure what you meant by what you just said.",
+        "Could you repeat that?",
+        "Sorry, but I must have misheard, or my pattern recognition services aren't as good as they used to be!",
+        "I am SO sorry, but could you repeat that?",
     ]
     response = random.choice(responses)
     speak(response)
 
-
+# Function to gracefully exit the program
 def stoplistening():
     responses = [
         "Until next time! Stay well!",
         "Goodbye! It was a pleasure assisting you.",
-        "goodbye! Remember, I'm here if you need anything.",
-        "over and out!",
-        "Farewell! Take care!" "Exiting program",
+        "Goodbye! Remember, I'm here if you need anything.",
+        "Over and out!",
+        "Farewell! Take care!",
+        "Exiting program",
     ]
     response = random.choice(responses)
     speak(response)
 
-
+# Function to play the wake word sound
 def play_wake_word_sound():
     sound_path = "Jarvis wake word sound.wav"
     pygame.mixer.init()
@@ -86,9 +86,8 @@ def play_wake_word_sound():
         pygame.time.Clock().tick(10)
     pygame.mixer.quit()
 
-
-def play_Jarvis_sound():
-    sound_path = "Jarvis stopped listening sound.wav"
+# Function to play a specific Jarvis sound
+def play_Jarvis_sound(sound_path):
     pygame.mixer.init()
     pygame.mixer.music.load(sound_path)
     pygame.mixer.music.play()
@@ -96,37 +95,16 @@ def play_Jarvis_sound():
         pygame.time.Clock().tick(10)
     pygame.mixer.quit()
 
-
-def play_Jarvis_sound_2():
-    sound_path = "Jarvis noise for opening tabs.wav"
-    pygame.mixer.init()
-    pygame.mixer.music.load(sound_path)
-    pygame.mixer.music.play()
-    while pygame.mixer.music.get_busy():
-        pygame.time.Clock().tick(10)
-    pygame.mixer.quit()
-
-
-def play_Jarvis_sound_3():
-    sound_path = "jarvis noise for searching something up.wav"
-    pygame.mixer.init()
-    pygame.mixer.music.load(sound_path)
-    pygame.mixer.music.play()
-    while pygame.mixer.music.get_busy():
-        pygame.time.Clock().tick(10)
-    pygame.mixer.quit()
-
-
+# Function to handle Google search response
 def searchedonGoogle():
     responses = [
-        "i hope you find what your looking for!",
-        "if you can't find what your looking for on google, maybe try chat g p t, Chat-sonic or use. edge",
-        "new tab opened, let me know if you need anything else!",
-        "new tab has now been opened,i can put some music on in the background just say, play some background music,",
+        "I hope you find what you're looking for!",
+        "If you can't find what you're looking for on Google, maybe try ChatGPT, Chat-sonic, or Edge.",
+        "New tab opened, let me know if you need anything else!",
+        "New tab has now been opened, I can put some music on in the background. Just say, 'play some background music.'",
     ]
     response = random.choice(responses)
     speak(response)
-
 
 def RestartGoodbyes():
     responses = [
@@ -138,17 +116,6 @@ def RestartGoodbyes():
         "Restarting PC",
         "Restart initiated",
         "Restarting your PC",
-    ]
-    response = random.choice(responses)
-    speak(response)
-
-
-def RandomAlexa():
-    responses = [
-        "Does Alexa have a personality? I think not!, Does Alexa have a cool owner that codes them updates every weekend!. I Think NOT! I!,E! i am better!",
-        "Well seeing as Alexa as of right now is just using basic if and elif statements and I, Jarvis! has a language model, trained on about 175 billion pieces of text and data pulled from various parts of the internet, plus on top of that, elif and if statements that cleverly predict common said phrases, so in short, Yes!, Yes i am better than Alexa, and amazon, lets start some beef!",
-        "I am OFFENDED!, of corse i am better than Alexa!",
-        "was that a Joke? if so it was funny",
     ]
     response = random.choice(responses)
     speak(response)
@@ -280,7 +247,6 @@ def ConversationFlow():
         elif "restart" in usersaid:
             speak("restarting in 5 seconds")
             time.sleep(5)
-            #############################################################################################################################################################################################################
             os.system("shutdown /r /t 1")
 
         if "the time" in usersaid:
