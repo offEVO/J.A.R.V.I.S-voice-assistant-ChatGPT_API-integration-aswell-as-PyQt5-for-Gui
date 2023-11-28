@@ -20,7 +20,6 @@ FYI there will be a few extra dependancys that require special setup, this inclu
 Here's how to install PVPorkupine..
 NOTE: it is an older version (because it doesn't require an API_KEY)
 
-
-Click on this link, it will take you a specific page on PyPy for Pvporkupine V1.9.5 there are more recent versions, you can experiment with those if you want but i personally find 1.9.5 wors very well, I use this older version because like i meantioned earlyer it doesn't need an API KEY
+Click on this link, it will take you a specific page on PyPy for Pvporkupine V1.9.5 there are more recent versions, you can experiment with those if you want but i personally find 1.9.5 wors very well, I use this older version because like I meantioned earlyer it doesn't need an API KEY
 
 LINK: https://pypi.org/project/pvporcupine/1.9.5/
