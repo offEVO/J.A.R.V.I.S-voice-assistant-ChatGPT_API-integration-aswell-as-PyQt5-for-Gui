@@ -1,5 +1,5 @@
 # J.A.R.V.I.S-voice-assistant
-This is my code so far on my Jarvis voice assistant, it incorporates the Chatgpt API, Pyttsx3 TTS (unfortunatly) and also a login system/ GUI 
+This is my code so far on my Jarvis voice assistant, it incorporates the Chatgpt API, Pyttsx3 (unfortunatly) and also a login system/ GUI 
 
 FYI I'm still working out a lot of kinks please if you happen to review or use this code leve some suggestions either on github or at this email "Nelsonbazzar@gmail.com"
 
