@@ -1,12 +1,12 @@
-# ===============================================
-# J.A.R.V.I.S.: version 4.0
-# ===============================================
-# Author: Nelson Bazzard
-# Disclaimer: This code is the intellectual property of Nelson Bazzard. You are granted
-# a license to use, modify, and distribute this code for non-commercial purposes only.
-# Republishing or using this code for commercial purposes without permission is strictly
-# prohibited. By using this code, you agree to abide by these terms.
-# ===============================================
+___________________________________________________________________________________________________________________________________________
+                                                       Jarvis Main COde
+___________________________________________________________________________________________________________________________________________
+Author: Nelson Bazzard
+Disclaimer: This code is the intellectual property of Nelson Bazzard. You are granted
+a license to use, modify, and distribute this code for non-commercial purposes only.
+Republishing or using this code for commercial purposes without permission is strictly
+prohibited. By using this code, you agree to abide by these terms.
+___________________________________________________________________________________________________________________________________________
 
 import pyaudio
 import speech_recognition as sr
@@ -447,6 +447,7 @@ def ConversationFlow():
         elif "what's my name" in usersaid or "my name" in usersaid:
             speak(f"The current account logged in is, {PERSONsNAME}")
             start_jarvis()
+            # Author: Nelson Bazzard
 
         elif (
             "play some background music" in usersaid
@@ -459,6 +460,7 @@ def ConversationFlow():
             )
             wb.open_new_tab(CHILLMUSIC_URL)
             start_jarvis()
+            # Disclaimer: This code is the intellectual property of Nelson Bazzard. You are granted
 
         elif (
             "play rain sounds" in usersaid
@@ -470,6 +472,7 @@ def ConversationFlow():
             )
             wb.open_new_tab(RAINSOUND_URL)
             start_jarvis()
+              # a license to use, modify, and distribute this code for non-commercial purposes only.
 
         elif "open" in usersaid and "eBay" in usersaid:
             speak(
@@ -477,11 +480,13 @@ def ConversationFlow():
             )
             wb.open_new_tab(EBAY_URL)
             start_jarvis()
+            # Republishing or using this code for commercial purposes without permission is strictly
 
         elif "open" in usersaid and "IKEA" in usersaid:
             speak("One moment. Opening IKEA. Enjoy your shopping!")
             wb.open_new_tab(IKEA_URL)
             start_jarvis()
+             # prohibited. By using this code, you agree to abide by these terms.
 
         # windows apps
         if (
@@ -632,6 +637,12 @@ def start_jarvis():
                 print("Wakeword Detected.. ", end="")
                 play_wake_word_sound()
                 ConversationFlow()
+
+# Author: Nelson Bazzard
+# Disclaimer: This code is the intellectual property of Nelson Bazzard. You are granted
+# a license to use, modify, and distribute this code for non-commercial purposes only.
+# Republishing or using this code for commercial purposes without permission is strictly
+# prohibited. By using this code, you agree to abide by these terms.
 
     finally:
         if porcupine is not None:
