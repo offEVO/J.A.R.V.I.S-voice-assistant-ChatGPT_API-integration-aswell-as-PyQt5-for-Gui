@@ -1,12 +1,12 @@
-___________________________________________________________________________________________________________________________________________
-                                                       Jarvis Main COde
-___________________________________________________________________________________________________________________________________________
-Author: Nelson Bazzard
-Disclaimer: This code is the intellectual property of Nelson Bazzard. You are granted
-a license to use, modify, and distribute this code for non-commercial purposes only.
-Republishing or using this code for commercial purposes without permission is strictly
-prohibited. By using this code, you agree to abide by these terms.
-___________________________________________________________________________________________________________________________________________
+#___________________________________________________________________________________________________________________________________________
+                                                       #Jarvis Main COde
+#___________________________________________________________________________________________________________________________________________
+#Author: Nelson Bazzard
+#Disclaimer: This code is the intellectual property of Nelson Bazzard. You are granted
+#a license to use, modify, and distribute this code for non-commercial purposes only.
+#Republishing or using this code for commercial purposes without permission is strictly
+#prohibited. By using this code, you agree to abide by these terms.
+#___________________________________________________________________________________________________________________________________________
 
 import pyaudio
 import speech_recognition as sr
