@@ -1,3 +1,13 @@
+# ===============================================
+# J.A.R.V.I.S.: version 4.0
+# ===============================================
+# Author: Nelson Bazzard
+# Disclaimer: This code is the intellectual property of Nelson Bazzard. You are granted
+# a license to use, modify, and distribute this code for non-commercial purposes only.
+# Republishing or using this code for commercial purposes without permission is strictly
+# prohibited. By using this code, you agree to abide by these terms.
+# ===============================================
+
 import pyaudio
 import speech_recognition as sr
 import datetime
