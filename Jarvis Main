@@ -46,8 +46,6 @@ NETFLIX_URL = "https://www.netflix.com/browse"
 AMAZON_URL = "https://www.amazon.co.uk"
 EBAY_URL = "https://www.ebay.co.uk"
 IKEA_URL = "https://www.ikea.com"
-CHILLMUSIC_URL = "https://www.youtube.com/watch?v=FFfdyV8gnWk"
-RAINSOUND_URL = "https://www.youtube.com/watch?v=heG8uPLaxYY"
 
 def greetings():
     current_time = datetime.datetime.now().time()
@@ -294,7 +292,6 @@ def ConversationFlow():
         elif "restart" in usersaid:
             speak("restarting in 5 seconds")
             time.sleep(5)
-            #############################################################################################################################################################################################################
             os.system("shutdown /r /t 1")
 
         if "the time" in usersaid:
@@ -557,17 +554,6 @@ def ConversationFlow():
                 "Javis Personality: Calm and composed demeanor, Displays a dry sense of humor, Polite and respectful communication, Highly intelligent and sophisticated\n"
                 "Jarvis Interests: Coding, Electronics, Watches Netflix during downtime\n"
                 "Jarvis Request to Creator: Always wants Nelson to code new updates\n"
-                "Family:\n"
-                "Nelson: young entrepreneur and hobbyist, Nelson is your creator his hobbies consist of Coding Just A Rather Very Intelligent System or Jarvis and running a business called CreoAI. Becky (Nelson's Mum), Hermann (Nelson's Dad), his Nanny is called Janis bazzard.\n"
-                "Becky: Loving mother and entrepreneur, She co-ownes a business called Bazzard and Harris with her business partner and friend Victoria Harris\n"
-                "Hermann: Nelson's father, hobbies consist of Basketball and mixed martial arts also know as MMA\n"
-                "Tamara: Nelson's Cousin Tamara has a sister called Bella they are both sporty and active tamara is a bit of a wild card, Jason (Tamara and Bella's Dad), Jesse (Tamara and Bella's Mum)\n"
-                "Sophia: Nelson's cousin sophia has a brother called Josh they both have fun bouny personalities, Chloe (Sophia and Josh's Mum), Matthew (Sophia and Josh's Dad)\n"
-                "Grandad: Nelson's grandad is the Father of Becky, Jesse and Chloe. He no longer lives with Nanny (Jan) his hobbies consist of watching TV going to the Pub and looking after his farm, he has a girlfriend called Jill who is like a second grandmother to Nelson and a very lovely women grandad dos not have alzheimer's\n"
-                "Nanny: Nelson's Nanny's is the Mother of Becky, Jesse and Chloe. her hobbies are cycling and drinking tea. In Nelon's eyes she is The best Nanny in the world, Jan has a boyfriend called richard who is currently struggling with alzheimer's\n"
-                "Dom: Dom is Nelsons best friend, he likes blender\n"
-                "Alex: is one of Nelson's best friends and playes Fortnite and has wierd friends"
-                "Jill: Jill has 3 grandsons called Harry, raffie and benny they are all good friends of Nelson's and when they visit grandads farm they all polay football or nerf. Jill is not nelsons nanny. Jill lives with grandad on the farm. jill does not play football\n"
                 + usersaid
             )
             response = openai.Completion.create(
@@ -586,7 +572,6 @@ def ConversationFlow():
             time.sleep(0.2)
 
         time.sleep(1)
-
 
 def main():
     porcupine = None
