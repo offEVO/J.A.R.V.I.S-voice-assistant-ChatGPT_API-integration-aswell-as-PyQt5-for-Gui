@@ -142,7 +142,6 @@ def RestartGoodbyes():
     response = random.choice(responses)
     speak(response)
 
-
 def RandomAlexa():
     responses = [
         "Does Alexa have a personality? I think not!, Does Alexa have a cool owner that codes them updates every weekend!. I Think NOT! I!,E! i am better!",
@@ -152,7 +151,6 @@ def RandomAlexa():
     ]
     response = random.choice(responses)
     speak(response)
-
 
 def Randomresponseforbetter():
     responses = [
@@ -165,7 +163,6 @@ def Randomresponseforbetter():
     ]
     response = random.choice(responses)
     speak(response)
-
 
 def speak(data):
     voice = "en-US-ChristopherNeural"
