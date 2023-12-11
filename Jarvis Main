@@ -26,7 +26,7 @@ import sys
 from PyQt5.QtWidgets import QApplication
 import openai
 
-openai.api_key = "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"
+openai.api_key = "YOUR_API_KEY"
 
 calculator_process = None
 task_manager_process = None
