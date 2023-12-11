@@ -32,8 +32,8 @@ calculator_process = None
 task_manager_process = None
 file_exp_process = None
 notepad_process = None
-REF1 = "sir"
-REF2 = "Becky"
+REF1 = "Sir/Miss"
+REF2 = "A_NAME"
 SIR = "sir!"
 PERSONsNAME = "Nelson"
 COUNT = 1
@@ -49,7 +49,6 @@ IKEA_URL = "https://www.ikea.com"
 CHILLMUSIC_URL = "https://www.youtube.com/watch?v=FFfdyV8gnWk"
 RAINSOUND_URL = "https://www.youtube.com/watch?v=heG8uPLaxYY"
 
-
 def greetings():
     current_time = datetime.datetime.now().time()
     if 5 <= current_time.hour < 12:
@@ -61,7 +60,6 @@ def greetings():
     else:
         return "Good to see you," + REF1
 
-
 def ElseFunctionForERROR():
     responses = [
         "i am not sure what you meant by what you just said.",
@@ -71,7 +69,6 @@ def ElseFunctionForERROR():
     ]
     response = random.choice(responses)
     speak(response)
-
 
 def stoplistening():
     responses = [
@@ -84,7 +81,6 @@ def stoplistening():
     response = random.choice(responses)
     speak(response)
 
-
 def play_wake_word_sound():
     sound_path = "Listening.wav"
     pygame.mixer.init()
@@ -94,7 +90,6 @@ def play_wake_word_sound():
         pygame.time.Clock().tick(10)
     pygame.mixer.quit()
 
-
 def play_Jarvis_sound():
     sound_path = "Stopped.wav"
     pygame.mixer.init()
@@ -103,7 +98,6 @@ def play_Jarvis_sound():
     while pygame.mixer.music.get_busy():
         pygame.time.Clock().tick(10)
     pygame.mixer.quit()
-
 
 def play_Jarvis_sound_2():
     sound_path = "Jarvis noise for opening tabs.wav"
