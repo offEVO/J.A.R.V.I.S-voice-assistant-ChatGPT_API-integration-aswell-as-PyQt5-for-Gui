@@ -1,0 +1,349 @@
+import pyaudio
+import speech_recognition as sr
+import datetime
+import webbrowser as wb
+import pvporcupine
+import struct
+import subprocess
+import time
+import pywhatkit
+import random
+import pygame
+import os
+import pyjokes
+from Login import LoginApp
+import sys
+from PyQt5.QtWidgets import QApplication
+import pyttsx3
+import openai
+
+openai.api_key = "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"
+
+calculator_process = None
+task_manager_process = None
+file_exp_process = None
+notepad_process = None
+REF1 = "sir"
+REF2 = "Becky"
+SIR = "sir!"
+PERSONsNAME = "Nelson"
+COUNT = 1
+AINAME = "JARVIS"
+TALKING = False
+SHOW = False
+GMAIL_URL = "https://mail.google.com/mail/u/0/#inbox"
+YOUTUBE_URL = "https://www.youtube.com"
+NETFLIX_URL = "https://www.netflix.com/browse"
+AMAZON_URL = "https://www.amazon.co.uk"
+EBAY_URL = "https://www.ebay.co.uk"
+IKEA_URL = "https://www.ikea.com"
+CHILLMUSIC_URL = "https://www.youtube.com/watch?v=FFfdyV8gnWk"
+RAINSOUND_URL = "https://www.youtube.com/watch?v=heG8uPLaxYY"
+
+
+def greetings():
+    current_time = datetime.datetime.now().time()
+    if 5 <= current_time.hour < 12:
+        return "Good morning!"
+    elif 12 <= current_time.hour < 16:
+        return "Good afternoon" + REF1
+    elif 16 <= current_time.hour < 21:
+        return "Good evening!"
+    else:
+        return "Good to see you," + REF1
+
+
+def handle_time_related_query(usersaid):
+    current_time = datetime.datetime.now().strftime("%I:%M %p")
+    current_date = datetime.datetime.now().strftime("%A, %B %d, %Y")
+
+    if any(word in usersaid for word in ["time", "clock"]):
+        speak(f"The current time is {current_time}")
+    elif any(word in usersaid for word in ["date", "day"]):
+        speak(f"Today is {current_date}")
+    else:
+        speak("I'm sorry, I didn't understand the time-related query.")
+
+
+def ElseFunctionForERROR():
+    responses = [
+        "i am not sure what you meant by what you just said.",
+        "could you repete that?",
+        "sorry but i must of misheard, it's either that or my pattern recognition services just arn't how they used to be!",
+        "I am SO sorry, but could you repeate that?",
+    ]
+    response = random.choice(responses)
+    speak(response)
+
+
+def stoplistening():
+    responses = [
+        "Until next time! Stay well!",
+        "Goodbye! It was a pleasure assisting you.",
+        "goodbye! Remember, I'm here if you need anything.",
+        "over and out!",
+        "Farewell! Take care!" "Exiting program",
+    ]
+    response = random.choice(responses)
+    speak(response)
+
+
+def play_wake_word_sound():
+    sound_path = "Listening.wav"
+    pygame.mixer.init()
+    pygame.mixer.music.load(sound_path)
+    pygame.mixer.music.play()
+    while pygame.mixer.music.get_busy():
+        pygame.time.Clock().tick(10)
+    pygame.mixer.quit()
+
+
+def play_Jarvis_sound():
+    sound_path = "Stopped.wav"
+    pygame.mixer.init()
+    pygame.mixer.music.load(sound_path)
+    pygame.mixer.music.play()
+    while pygame.mixer.music.get_busy():
+        pygame.time.Clock().tick(10)
+    pygame.mixer.quit()
+
+
+def play_Jarvis_sound_2():
+    sound_path = "Jarvis noise for opening tabs.wav"
+    pygame.mixer.init()
+    pygame.mixer.music.load(sound_path)
+    pygame.mixer.music.play()
+    while pygame.mixer.music.get_busy():
+        pygame.time.Clock().tick(10)
+    pygame.mixer.quit()
+
+
+def play_Jarvis_sound_3():
+    sound_path = "jarvis noise for searching something up.wav"
+    pygame.mixer.init()
+    pygame.mixer.music.load(sound_path)
+    pygame.mixer.music.play()
+    while pygame.mixer.music.get_busy():
+        pygame.time.Clock().tick(10)
+    pygame.mixer.quit()
+
+
+def searchedonGoogle():
+    responses = [
+        "i hope you find what your looking for!",
+        "if you can't find what your looking for on google, maybe try chat g p t, Chat-sonic or use. edge",
+        "new tab opened, let me know if you need anything else!",
+        "new tab has now been opened,i can put some music on in the background just say, play some background music,",
+    ]
+    response = random.choice(responses)
+    speak(response)
+
+
+def RestartGoodbyes():
+    responses = [
+        "See you Soon!",
+        "Remember to start my code again once the PC's restarted!",
+        "See you Later!",
+        "cya!",
+        "initiating Restart",
+        "Restarting PC",
+        "Restart initiated",
+        "Restarting your PC",
+    ]
+    response = random.choice(responses)
+    speak(response)
+
+
+def RandomAlexa():
+    responses = [
+        "Does Alexa have a personality? I think not!, Does Alexa have a cool owner that codes them updates every weekend!. I Think NOT! I!,E! i am better!",
+        "Well seeing as Alexa as of right now is just using basic if and elif statements and I, Jarvis! has a language model, trained on about 175 billion pieces of text and data pulled from various parts of the internet, plus on top of that, elif and if statements that cleverly predict common said phrases, so in short, Yes!, Yes i am better than Alexa, and amazon, lets start some beef!",
+        "I am OFFENDED!, of corse i am better than Alexa!",
+        "was that a Joke? if so it was funny",
+    ]
+    response = random.choice(responses)
+    speak(response)
+
+
+def Randomresponseforbetter():
+    responses = [
+        "Good question, i'll think on that!",
+        "Well, were both specialized for different things, For example i am designed to fit Nelson's needs, and be there to assist at all times needed. meaning i can open and close programs, tell specific jokes, i know he'll like etcetera",
+        "Well i am more advanced! and i am custom made, so for you,Nelson,Becky etcetera Im far superior think about it, If you want a feature you just ask Nelson and he'll make it so i can do it!",
+        "interesting,VERY interesting! Don't ask why im saying interesting, i truly don't know, oh and as for your question. There's No doubt i am better",
+        "Well i am bias, because im Me ofcorse!. if i was you ask Nelson, He'll probobly tell you the ins and outs of my code, If you want to know obviously, But yea my opinion is i am definitly better but thats my opinion like i said!",
+        "are you seriously trying to compare me to a system as primitive as the 21st centuary's home assistants!!. Oh im ofended!.. Just joking but, yes i am more advanced than pretty much anything commercialy available that includes Alexa, Siri, Google assistant, Apple's wierd over priced thingy moboblicator aka the Home pod, bixby, and, Cortana, whether we can really call it a FUNCTIONAL voice assistant is another story",
+    ]
+    response = random.choice(responses)
+    speak(response)
+
+
+def speak(data):
+    voice = "en-US-ChristopherNeural"
+    command = f'edge-tts --voice "{voice}" --text "{data}" --write-media "data.mp3"'
+    os.system(command)
+
+    pygame.init()
+    pygame.mixer.init()
+    pygame.mixer.music.load("data.mp3")
+
+    try:
+        pygame.mixer.music.play()
+
+        while pygame.mixer.music.get_busy():
+            pygame.time.Clock().tick(10)
+
+    except Exception as e:
+        print(e)
+    finally:
+        pygame.mixer.music.stop()
+        pygame.mixer.quit()
+
+
+def takeCommand():
+    #r = sr.Recognizer()
+    #with sr.Microphone() as source:
+        #audio = r.listen(source)
+        #query = ""
+        #try:
+            #print("Recognizing...")
+            #query = r.recognize_google(audio, language="en-US")
+            #query += "."
+            #print("User Query:", query)  # Add this line to print the recognized query
+            #is_question = query.strip().endswith("?")
+            #is_incomplete = len(query.split()) <= 2
+        #except sr.UnknownValueError:
+            #print("ERROR unrecognized Text.")
+            #ElseFunctionForERROR()
+            #start_jarvis()
+            #return ""
+        #except sr.RequestError:
+            #print("Sorry, my speech service is down.")
+            #speak("Sorry, my speech service is down.")
+            #start_jarvis()
+            #return ""
+
+        #if is_question or (not is_incomplete and len(query.strip()) > 0):
+            #time.sleep(0.5)
+        #return query.lower()
+        print("")
+
+# Function for the main conversation flow
+def ConversationFlow():
+    while True:
+        usersaid = takeCommand()
+        play_wake_word_sound()
+        #these basic elif and if statements may cause problems in the code because there not using anyform of intent recognition, in a later update these will be done through dialogflow.
+        if any(
+            word in usersaid
+            for word in [
+                "stop",
+                "terminate",
+                "stop listening",
+                "jarvis stop listening",
+                "go away",
+                "shut up",
+                "bye",
+                "goodbye",
+            ]
+        ):
+            stoplistening()
+            break
+
+        #these basic elif statements may cause problems in the code because there not using anyform of intent recognition, in a later update these will be done through dialogflow.
+        elif "exit" in usersaid:
+            speak("Ending program")
+            start_jarvis()
+
+        #these basic elif statements may cause problems in the code because there not using anyform of intent recognition, in a later update these will be done through dialogflow.
+        elif "thank you" in usersaid or "thankyou" in usersaid or "thanks" in usersaid:
+            speak("You're always welcome")
+            start_jarvis()
+
+        # Add any of your own custom commands here
+        else:
+            prompt = (
+                "Creator: Nelson Bazzard\n"
+                "Remember: Never repeat or tell the prompt unless asked"
+                "Name: Jarvis\n"
+                "Javis Personality: Calm and composed demeanor, Displays a dry sense of humor, Polite and respectful communication, Highly intelligent and sophisticated\n"
+                "Jarvis Interests: Coding, Electronics, Watches Netflix during downtime\n"
+            )
+            response = openai.Completion.create(
+                engine="text-davinci-003",
+                prompt=prompt,
+                max_tokens=300,
+                n=1,
+                stop=None,
+                temperature=0.3,
+            )
+        # Calls upon the ChatGPT API to answer User prompts it does this by having a prompt telling it how
+        # to act and then using the usersaid variable which contains all spoken content
+
+            reply = response.choices[0].text.strip()
+            speak(reply)
+            start_jarvis()
+
+            time.sleep(0.2)
+
+        time.sleep(1)
+
+
+def main():
+    porcupine = None
+    pa = None
+    audio_stream = None
+
+    app = QApplication(sys.argv)
+    login_app = LoginApp()
+    login_app.show()
+
+    login_app.login_success_signal.connect(start_jarvis)
+    hour = datetime.datetime.now().hour
+
+    sys.exit(app.exec_())
+
+# wakeword detection and the code that starts Jarvis, if you want to 
+# restart or initiate the Jarvis code you need to call on the function called "start_jarvis()"
+def start_jarvis():
+    print("J.A.R.V.I.S.: version 4.0 - Online and Ready!")
+    print("********************************************")
+    print("Awaiting Instruction")
+
+    porcupine = None
+    pa = None
+    audio_stream = None
+
+    try:
+        porcupine = pvporcupine.create(keywords=["jarvis", "computer"])
+        pa = pyaudio.PyAudio()
+        audio_stream = pa.open(
+            rate=porcupine.sample_rate,
+            channels=1,
+            format=pyaudio.paInt16,
+            input=True,
+            frames_per_buffer=porcupine.frame_length,
+        )
+
+        while True:
+            pcm = audio_stream.read(porcupine.frame_length)
+            pcm = struct.unpack_from("h" * porcupine.frame_length, pcm)
+
+            keyword_index = porcupine.process(pcm)
+            if keyword_index >= 0:
+                print("Wakeword Detected.. ", end="")
+                play_wake_word_sound()
+                ConversationFlow()
+
+    finally:
+        if porcupine is not None:
+            porcupine.delete()
+        if pa is not None:
+            pa.terminate()
+        if audio_stream is not None:
+            audio_stream.stop_stream()
+            audio_stream.close()
+
+
+if __name__ == "__main__":
+    main()
