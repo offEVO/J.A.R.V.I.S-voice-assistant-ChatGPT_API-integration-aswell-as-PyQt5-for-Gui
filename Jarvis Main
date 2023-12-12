@@ -17,14 +17,14 @@ from PyQt5.QtWidgets import QApplication
 import pyttsx3
 import openai
 
-openai.api_key = "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"
+openai.api_key = "Your_API_Key"
 
 calculator_process = None
 task_manager_process = None
 file_exp_process = None
 notepad_process = None
 REF1 = "sir"
-REF2 = "Becky"
+REF2 = "Your_Name"
 SIR = "sir!"
 PERSONsNAME = "Nelson"
 COUNT = 1
