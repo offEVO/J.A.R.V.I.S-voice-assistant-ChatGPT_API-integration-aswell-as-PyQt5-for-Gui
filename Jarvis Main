@@ -37,15 +37,14 @@ REF2 = "A_NAME"
 SIR = "ADD_What_ever_you_want_here"
 PERSONsNAME = "Nelson"
 COUNT = 1
-AINAME = "JARVIS"
 TALKING = False
 SHOW = False
-GMAIL_URL = "https://mail.google.com/mail/u/0/#inbox"
-YOUTUBE_URL = "https://www.youtube.com"
-NETFLIX_URL = "https://www.netflix.com/browse"
-AMAZON_URL = "https://www.amazon.co.uk"
-EBAY_URL = "https://www.ebay.co.uk"
-IKEA_URL = "https://www.ikea.com"
+GMAIL_URL = "Add_Your_Gmail_Url"
+YOUTUBE_URL = "Add_Your_YouTube_Url"
+NETFLIX_URL = "Add_Your_Netflix_Url"
+AMAZON_URL = "Add_Your_Netflix_Url"
+EBAY_URL = "Add_Your_eBay_Url"
+IKEA_URL = "Add_Your_Ikea_Url"
 
 def greetings():
     current_time = datetime.datetime.now().time()
@@ -106,7 +105,6 @@ def play_Jarvis_sound_2():
         pygame.time.Clock().tick(10)
     pygame.mixer.quit()
 
-
 def play_Jarvis_sound_3():
     sound_path = "jarvis noise for searching something up.wav"
     pygame.mixer.init()
@@ -115,7 +113,6 @@ def play_Jarvis_sound_3():
     while pygame.mixer.music.get_busy():
         pygame.time.Clock().tick(10)
     pygame.mixer.quit()
-
 
 def searchedonGoogle():
     responses = [
@@ -126,7 +123,6 @@ def searchedonGoogle():
     ]
     response = random.choice(responses)
     speak(response)
-
 
 def RestartGoodbyes():
     responses = [
