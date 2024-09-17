@@ -2,10 +2,11 @@
 ___________________________________________________________________________________________________________________________________________
                                                        Contribution Guidelines
 ___________________________________________________________________________________________________________________________________________
-Thank you for your interest in contributing to the J.A.R.V.I.S Project. Your contributions helps make my projects better and more inclusive. Please follow these guidelines to ensure a positive and collaborative environment.
+Thank you for your interest in contributing to the J.A.R.V.I.S Project. Your contributions help improve my projects and make them more refined.
 
 ___________________________________________________________________________________________________________________________________________
                                                          How to Contribute
 ___________________________________________________________________________________________________________________________________________
-A way you could contribute is, Any idia's you have or additions you think would work in the code, feel free to send me an email at "Nelsonbazzard@gmail.co.uk"
+One way to contribute is simply by sendinng me an email with any ideas you have of implementation, or upload your implementations and tag me
 
+email at "Nelsonbazzard@gmail.co.uk"
